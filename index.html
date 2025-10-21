@@ -9,7 +9,6 @@
   <meta name="description" content="Zombie Hunters is a TikTok Live interactive survival game by ChatTok Gaming. Stream it, let your chat spawn hordes, and earn diamonds while you play. CTA-first landing page: Start now." />
   <link rel="canonical" href="https://ogdeig.github.io/zombie-hunters/" />
 
-  <!-- Optional favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <!-- Open Graph -->
@@ -30,6 +29,16 @@
 
   <link rel="preload" as="image" href="images/zombie-hunters-cover.png" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Small HTML-only tweaks to stabilize spacing (no CSS file changes required) -->
+  <style>
+    /* Ensure step items wrap cleanly as one block next to the number */
+    .steps li{grid-template-columns:auto 1fr}
+    .step-wrap h4{margin:0 0 .25rem 0; font-size:1.05rem; line-height:1.35}
+    .step-wrap p{margin:0; color:#cfd6d3}
+    /* Tighter compact variant */
+    .steps.compact .step-wrap h4{font-size:1rem}
+  </style>
 </head>
 <body>
   <!-- ===== HERO / CTA-FIRST ===== -->
@@ -77,14 +86,36 @@
         </p>
       </section>
 
+      <!-- ===== FIXED SPACING SECTION #1 ===== -->
       <section id="how-it-works" class="panel">
         <h3>How It Works (In 60 Seconds)</h3>
         <ol class="steps">
-          <li><span>Go Live on TikTok.</span> Launch TikTok Live Studio and Start Your Live Show Head over to ChatTok Gaming and start Zombie Hunters.</li>
-          <li><span>Viewers control gameplay.</span> Comments and gifts spawn zombies, hazards, power-ups, and flag events.</li>
-          <li><span>Your mission.</span> Survive waves, capture flags, and escort them back to base while chat makes it harder.</li>
-          <li><span>Grow + Monetize.</span> Keep hype high, convert viewers to followers, and earn diamonds as you play.</li>
+          <li>
+            <div class="step-wrap">
+              <h4>Go Live on TikTok</h4>
+              <p>Launch TikTok Live Studio, start your show, then head to <strong>ChatTok Gaming</strong> to launch <em>Zombie Hunters</em>.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-wrap">
+              <h4>Viewers Control Gameplay</h4>
+              <p>Comments and gifts spawn zombies, hazards, power-ups, and flag events in real time.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-wrap">
+              <h4>Your Mission</h4>
+              <p>Survive waves, capture flags, and escort them back to base while chat tries to overwhelm you.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-wrap">
+              <h4>Grow + Monetize</h4>
+              <p>Keep hype high, convert viewers to followers, and earn diamonds as you play.</p>
+            </div>
+          </li>
         </ol>
+
         <div class="cta-inline">
           <a class="btn btn-primary" href="https://chattokgaming.com" target="_blank" rel="noopener">Start Playing Now</a>
         </div>
@@ -110,12 +141,28 @@
         </div>
       </section>
 
+      <!-- ===== FIXED SPACING SECTION #2 ===== -->
       <section class="panel highlight">
         <h3>Setup in 3 Steps</h3>
         <ol class="steps compact">
-          <li><span>Create or log in</span> at <a href="https://chattokgaming.com" target="_blank" rel="noopener">ChatTokGaming.com</a>.</li>
-          <li><span>Choose Zombie Hunters</span> and connect it to your TikTok Live.</li>
-          <li><span>Press Go Live</span> and drop your CTA: “Spawn the horde!”</li>
+          <li>
+            <div class="step-wrap">
+              <h4>Create or Log In</h4>
+              <p>Visit <a href="https://chattokgaming.com" target="_blank" rel="noopener">ChatTokGaming.com</a> and sign in.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-wrap">
+              <h4>Choose Zombie Hunters</h4>
+              <p>Connect it to your TikTok Live.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-wrap">
+              <h4>Press Go Live</h4>
+              <p>Drop your CTA: <em>“Spawn the horde!”</em></p>
+            </div>
+          </li>
         </ol>
         <a class="btn btn-accent" href="https://chattokgaming.com" target="_blank" rel="noopener">Subscribe for Access</a>
       </section>
