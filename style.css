@@ -1,7 +1,6 @@
 /* ==========================================================================
-   Landing Pages – Clean, Responsive Styles
-   Brand accents: toxic green (#24f28c), neon orange (#ff7a1a),
-                  legacy pink (#ff0050) & cyan (#00f2ea)
+   Landing Pages – Clean, Responsive Styles (cache-busted, fixed fonts)
+   Brand accents: #24f28c (green), #ff7a1a (orange), #ff0050 (pink), #00f2ea (cyan)
    ========================================================================== */
 
 /* --- Design tokens ------------------------------------------------------- */
@@ -10,27 +9,28 @@
   --text:#e9f0ee;
   --muted:#a7b1ad;
 
-  --brand-green:#24f28c;   /* toxic green highlight */
-  --brand-orange:#ff7a1a;  /* neon orange highlight */
-  --brand-pink:#ff0050;    /* legacy brand color (subtle accents) */
-  --brand-cyan:#00f2ea;    /* legacy brand color (subtle accents) */
+  --brand-green:#24f28c;
+  --brand-orange:#ff7a1a;
+  --brand-pink:#ff0050;
+  --brand-cyan:#00f2ea;
 
   --card:#0c0f11;
   --stroke:#1a1f22;
   --shadow:0 10px 40px rgba(0,0,0,.6);
 
-  /* Fluid type scale */
+  /* Fluid type scale (safe fallbacks) */
   --fs-xs:clamp(.78rem, .66rem + .4vw, .88rem);
   --fs-sm:clamp(.9rem, .82rem + .4vw, 1.02rem);
   --fs-md:clamp(1rem, .95rem + .5vw, 1.15rem);
   --fs-lg:clamp(1.25rem, 1.05rem + 1.2vw, 1.7rem);
-  --fs-xl:clamp(2rem, 1.6rem + 2.6vw, 3rem);
+  --fs-xl:clamp(2.2rem, 1.8rem + 3vw, 3.2rem);
 }
 
 /* --- Base / reset -------------------------------------------------------- */
 *{box-sizing:border-box}
 html,body{height:100%}
-html{font-size:16px}               /* fallback so text never goes tiny */
+html{font-size:16px} /* critical: prevents “tiny text” if vars fail */
+
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -52,29 +52,21 @@ a:hover{color:#fff}
 h1,h2,h3{line-height:1.15;margin:0 0 .6em}
 h1{font-size:var(--fs-xl);font-weight:900}
 h2{font-size:var(--fs-lg);font-weight:800}
-h3{font-size:1.15rem;font-weight:800}
+h3{font-size:1.2rem;font-weight:800}
 p{margin:.6em 0}
 ul{margin:.6em 0 .6em 1.1em}
 
 /* --- Layout (10% side gutters) ------------------------------------------ */
-.wrapper,
-.container{
-  width:100%;
-  margin:0 auto;
-  padding-left:10vw;
-  padding-right:10vw;
-}
-
+.container{width:100%; margin:0 auto; padding-left:10vw; padding-right:10vw}
+.wrapper{width:100%; margin:0 auto; padding-left:10vw; padding-right:10vw}
 .content{padding:3.5rem 0 2rem}
 
-/* Slightly reduce gutters on very small phones */
 @media (max-width:480px){
-  .wrapper,.container{padding-left:6vw;padding-right:6vw}
+  .container,.wrapper{padding-left:6vw;padding-right:6vw}
   .content{padding:2.2rem 0 2rem}
 }
 
 /* --- Cards / panels ------------------------------------------------------ */
-.card,
 .panel{
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
   border:1px solid var(--stroke);
@@ -86,35 +78,22 @@ ul{margin:.6em 0 .6em 1.1em}
 .panel.highlight{border-color:rgba(36,242,140,.35); box-shadow:0 12px 45px rgba(36,242,140,.07)}
 
 /* --- Hero --------------------------------------------------------------- */
-.hero{
-  position:relative; min-height:78vh;
-  display:grid; place-items:center; text-align:center; overflow:hidden;
-}
+.hero{position:relative; min-height:78vh; display:grid; place-items:center; text-align:center; overflow:hidden}
 .hero-media{position:absolute; inset:0}
-.hero-media img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; filter:saturate(1.05) contrast(1.05) brightness(.7)
-}
-.hero-overlay{
-  position:absolute; inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.8) 30%, rgba(0,0,0,.95) 80%)
-}
-.hero-noise{
-  position:absolute; inset:-50px; opacity:.08;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
-}
+.hero-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(1.05) contrast(1.05) brightness(.7)}
+.hero-overlay{position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.8) 30%, rgba(0,0,0,.95) 80%)}
+.hero-noise{position:absolute; inset:-50px; opacity:.08; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .hero-inner{position:relative; z-index:2; padding:6rem 0 3rem}
 
-.title{font-size: clamp(2.6rem, 6vw, 5rem); line-height:1.05; margin:0 0 1rem}
+/* Ensures hero titles remain large even if other CSS fails */
+.title{font-size: clamp(2.4rem, 6vw, 5rem); line-height:1.05; margin:0 0 1rem; font-weight:900}
 .title-top{display:block; font-weight:800; letter-spacing:.06em; color:var(--brand-orange); text-shadow:0 10px 30px rgba(255,122,26,.35)}
 .title-bottom{display:block; font-weight:900; letter-spacing:.04em; color:var(--brand-green); text-shadow:0 10px 30px rgba(36,242,140,.35)}
-
 .subtitle{max-width:800px; margin:0 auto 2rem; color:var(--muted); font-size:clamp(1rem,2.2vw,1.2rem)}
 
 /* --- Buttons / CTAs ----------------------------------------------------- */
 .cta-row{display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; justify-content:center; margin:1rem 0 1.5rem}
 .btn{
-  --ring:transparent;
   display:inline-flex; align-items:center; justify-content:center;
   padding:.85rem 1.1rem; border-radius:999px;
   font-weight:700; text-decoration:none; transition:transform .2s ease, filter .2s ease, box-shadow .2s ease; border:1px solid transparent;
@@ -139,10 +118,7 @@ ul{margin:.6em 0 .6em 1.1em}
 @media (min-width:820px){.grid.two{grid-template-columns:1fr 1fr}}
 
 .steps{counter-reset:step; list-style:none; padding:0; margin:0}
-.steps li{
-  display:grid; grid-template-columns:auto 1fr; align-items:start; gap:.8rem;
-  padding:.6rem 0; border-bottom:1px dashed var(--stroke)
-}
+.steps li{display:grid; grid-template-columns:auto 1fr; align-items:start; gap:.8rem; padding:.6rem 0; border-bottom:1px dashed var(--stroke)}
 .steps li:last-child{border-bottom:0}
 .steps li::before{
   counter-increment:step; content:counter(step);
@@ -175,14 +151,14 @@ a:focus,.btn:focus{outline:3px solid rgba(36,242,140,.5); outline-offset:2px; bo
 
 /* --- Responsive trims --------------------------------------------------- */
 @media (max-width:1024px){
-  .title{font-size: clamp(2.2rem, 5.5vw, 3.6rem)}
+  .title{font-size: clamp(2rem, 5.5vw, 3.4rem)}
 }
 @media (max-width:600px){
-  .card,.panel{padding:16px}
+  .panel{padding:16px}
   h1{font-size: clamp(1.6rem, 1.2rem + 2.8vw, 2rem)}
 }
 
-/* --- Optional: Light Mode (keep commented until you add a toggle) -------
+/* --- (Optional) Light Mode – keep commented until you add a toggle -------
 @media (prefers-color-scheme: light){
   :root{
     --bg:#ffffff;
